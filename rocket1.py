@@ -54,3 +54,13 @@ start = InputButton((10,400), "START", StartRocket, positioning="physical", size
 #Create and "run" the rocket
 rocket = Rocket(earth, thrust=GetThrust, mass=mp+me)
 earth.run(rocket)
+# Function for calculating the total rocket mass, based on burn time and total
+# propellent mass.
+def GetMass():
+    global RocketStarted
+    if RocketStarted:
+        # calculate empty mass plus a fraction of the propellent mass based on time
+        return me + mp*(tburn-BurnTime)/tburn
+    else:
+        # not started: just return the full pre-launch rocket mass
+        return me + mp
